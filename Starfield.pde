@@ -2,12 +2,13 @@ NormalParticle [] regPart;
 void setup()
 {
   //your code here
-  size(1000,1000);
+  size(500,500);
   regPart = new NormalParticle[100];
   for(int nP = 0; nP < regPart.length; nP++)
   {
     regPart[nP] = new NormalParticle();
   }  
+  //noLoop();
 }
 void draw()
 {
@@ -20,7 +21,12 @@ void draw()
   }
 
 }
-class NormalParticle
+/*(void mousePressed()
+{
+
+}
+*/
+class NormalParticle implements Particle
 {
   int npX, npY; 
   double spD, anG, npDirect;
@@ -43,12 +49,13 @@ class NormalParticle
   }
   void show()
   {
-    ellipse(npX,npY,20,20);
+    ellipse(npX,npY,5,5);
   }
 }
 interface Particle
 {
-  //your code here
+  void move()
+  void show()
 }
 class OddballParticle //uses an interface
 {
