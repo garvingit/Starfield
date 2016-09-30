@@ -7,6 +7,7 @@ void setup()
   for(int nP = 0; nP < regPart.length; nP++)
   {
     regPart[nP] = new NormalParticle();
+    regPart[0] = new OddballParticle();
   }  
   //noLoop();
 }
@@ -21,15 +22,10 @@ void draw()
   }
 
 }
-/*(void mousePressed()
-{
-
-}
-*/
 class NormalParticle implements Particle
 {
-  int npX, npY; 
-  double spD, anG, npDirect;
+  //int npX, npY; 
+  double spD, anG, npX, npY, npDirect;
   //random direction in a circle
   NormalParticle()
   {
@@ -38,30 +34,35 @@ class NormalParticle implements Particle
     npY = 250;
     //speed random from 0-9 decimal values included
     spD = Math.random()*10;
-
-    npDirect = Math.PI * Math.random()* 2;
+	npDirect = Math.PI * Math.random()* 2;
 
   }
-  void move()
+  public void move()
   {
     npX += Math.cos(npDirect) * spD;
     npY += Math.sin(npDirect) * spD;
   }
-  void show()
+  public void show()
   {
-    ellipse(npX,npY,5,5);
+    ellipse((float)npX,(float)npY,5,5);
   }
 }
 interface Particle
 {
-  void move()
-  void show()
+	public void show()
+	public void move()
 }
-class OddballParticle //uses an interface
+class OddballParticle extends Particle //uses an interface
 {
-  //your code here
+  public void show(){
+  	ellipse((int)npX,(int)npY,5,5))
+  }
+  public void move(){
+  	npX += (int)(Math.random()*2)-1;
+  	npY += (int)(Math.random()*2)-1;
+  }
 }
-class JumboParticle //uses inheritance
+class JumboParticle extends Particle //uses inheritance
 {
   //your code here
 }
