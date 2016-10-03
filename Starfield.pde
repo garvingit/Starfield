@@ -1,9 +1,9 @@
-NormalParticle [] regPart;
+Particle [] regPart;
 void setup()
 {
   //your code here
   size(500,500);
-  regPart = new NormalParticle[100];
+  regPart = new Particle[100];
   for(int nP = 0; nP < regPart.length; nP++)
   {
     regPart[nP] = new NormalParticle();
@@ -24,18 +24,13 @@ void draw()
 }
 class NormalParticle implements Particle
 {
-  //int npX, npY; 
   double spD, anG, npX, npY, npDirect;
-  //random direction in a circle
   NormalParticle()
   {
-    //x,y at center of screen
     npX = 250;
     npY = 250;
-    //speed random from 0-9 decimal values included
     spD = Math.random()*10;
 	npDirect = Math.PI * Math.random()* 2;
-
   }
   public void move()
   {
@@ -49,20 +44,50 @@ class NormalParticle implements Particle
 }
 interface Particle
 {
-	public void show()
-	public void move()
+	public void show();
+	public void move();
 }
-class OddballParticle extends Particle //uses an interface
+class OddballParticle implements Particle //uses an interface
 {
+	double spD, anG, npX, npY, npDirect;
+	  OddballParticle()
+  {
+    npX = 250;
+    npY = 250;
+    spD = Math.random()*10;
+	//npY = npY + (int)(Math.random()*2)-1;
+  }
   public void show(){
-  	ellipse((int)npX,(int)npY,5,5))
+  	ellipse((int)npX,(int)npY,50,50);
   }
   public void move(){
-  	npX += (int)(Math.random()*2)-1;
-  	npY += (int)(Math.random()*2)-1;
+  	npX = npX + (int)(Math.random()*3)-1;
+  	npY = npY + (int)(Math.random()*3)-1;
+
+    /* if(npX > 500) 
+     {
+       npX = npX + (int)(Math.random()*2)-1;
+       npY = npY + (int)(Math.random()*3)-1;
+     }
+     else if(npX < 0) 
+     {
+       npX = npX + (int)(Math.random()*2);
+       npY = npY + (int)(Math.random()*3)-1;
+     }
+     else if(npY > 500)
+     {
+       npY = npY + (int)(Math.random()*2)-1;
+       npX = npX + (int)(Math.random()*3)-1;
+     }
+     else if(npY < 0) 
+     {
+       npY = npY + (int)(Math.random()*2);
+       npX = npX + (int)(Math.random()*3)-1;
+     }
+     */
   }
 }
-class JumboParticle extends Particle //uses inheritance
+class JumboParticle //uses inheritance
 {
   //your code here
 }
