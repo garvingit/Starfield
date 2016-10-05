@@ -41,10 +41,11 @@ void draw()
 class NormalParticle implements Particle
 {
   double spD, anG, npX, npY, npDirect;
+  int neg;
   NormalParticle()
   {
-    npX = 250;
-    npY = 250;
+    npX = width/2;
+    npY = height/2;
     spD = Math.random()*2;
 	npDirect = Math.PI * Math.random()* 2;
   }
@@ -52,6 +53,11 @@ class NormalParticle implements Particle
   {
     npX += Math.cos(npDirect) * spD;
     npY += Math.sin(npDirect) * spD;
+    if((npX > 490 && npX < 10) && (npX > 490 && npX < 10)) {
+    	n
+    }
+    
+
   }
   public void show()
   {
@@ -69,8 +75,8 @@ interface Particle
 
 class OddballParticle implements Particle //uses an interface
 {
-	double spD, anG, npX, npY, npDirect;
-	anG = anG + Math.toRadians(10);
+	double spD, npX, npY, npDirect;
+	int anG; 
 	int size = 10;
 	  OddballParticle()
   {
@@ -83,7 +89,7 @@ class OddballParticle implements Particle //uses an interface
   	ellipse((int)npX,(int)npY,size,size);
   }
   public void move(){
-  	/*
+  	
   	npX = npX + (int)(Math.random()*7)-3;
   	npY = npY + (int)(Math.random()*7)-3;
   	size++;
@@ -92,9 +98,9 @@ class OddballParticle implements Particle //uses an interface
   		size = 10;
   		//size++;
   	}
-  	*/
-  	npX = 250 + 20*Math.cos(anG);
-  	npX = 250 + 20*Math.sin(anG);
+  	
+  	//npX = 250 + 20*Math.cos(anG);
+  	//npX = 250 + 20*Math.sin(anG);
   }
 }
 class JumboParticle extends NormalParticle //uses inheritance
