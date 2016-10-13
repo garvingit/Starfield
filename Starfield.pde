@@ -1,115 +1,94 @@
+
 Particle [] regPart;
-
-
 void setup()
 {
   //your code here
   size(500,500);
-  regPart = new Particle[10];
+  regPart = new Particle[500];
   for(int nP = 0; nP < regPart.length; nP++)
   {
-	regPart[nP] = new NormalParticle();
+  regPart[nP] = new NormalParticle();
   }
   regPart[0] = new OddballParticle();
   regPart[1] = new JumboParticle();
-  //noLoop();
 }
-
-
 void draw()
 {
   //your code here
-  background(65,105,225);
+  background(0);
   for(int nP = 0; nP < regPart.length; nP++)
   {
     regPart[nP].move();
     regPart[nP].show();
   }
-
-  text("X: " + mouseX, 400,10);
-  text("Y: " + mouseY, 400,30);
 }
-
-/*void mousePressed(){
-	for(int p = 0; p < regPart.length; p++){
-		regPart[p].npX =250;
-		regPart[p].npY =250;
-	}
-
-}*/
-
 class NormalParticle implements Particle
 {
-  double anG, npX, npY, npDirect;
-  int neg , spD;
+  double npX, npY, npDirect, spD;
+  float size = (int)(Math.random()*3)+1;
   NormalParticle()
   {
     npX = width/2;
     npY = height/2;
-    spD = (int)(Math.random()*10);
-	npDirect = Math.PI * Math.random()* 2;
+    spD = (Math.random()*3)+.5;
+    npDirect = TWO_PI * Math.random();
   }
   public void move()
   {
     npX += Math.cos(npDirect) * spD;
     npY += Math.sin(npDirect) * spD;
-    if(npX > 500 || npX < 0 || npX > 500 || npX < 0) {
-    	npX = width/2;
-    	npY= height/2;
-    	npX += Math.cos(npDirect) * spD;
-    npY += Math.sin(npDirect) * spD;
+    size += .05;
+    if(npX > 500 || npX < 0 || npY > 500 || npY < 0) {
+      npX = width/2;
+      npY= height/2;
+      size = (int)(Math.random()*3)+1;
+      npDirect = TWO_PI * Math.random();
     }
-    
-
   }
   public void show()
   {
-    ellipse((int)npX,(int)npY,5,5);
+    fill(188, 229, 255);
+    ellipse((int)npX,(int)npY, (float)size, (float)size);
   }
 }
-
 
 interface Particle
 {
-	public void show();
-	public void move();
+  public void show();
+  public void move();
 }
-
 class OddballParticle implements Particle //uses an interface
 {
-	double anG, spD, npX, npY;
-	int size = 10;
-	  OddballParticle()
+  double anG, spD, npX, npY;
+  int r = 200;
+    OddballParticle()
   {
-    npX = 250;
-    npY = 250;
+    npX=250;
+    npY=250;
     spD = Math.random()*10;
-    anG = Math.toRadians(45);
-	
+    anG = TWO_PI/8;
+  
   }
-
   public void move(){
-  	
-  	//npX = npX + (int)(Math.random()*7)-3;
-  	//npY = npY + (int)(Math.random()*7)-3;
-  	//size++;
-  	if(size > 50)
-  	{
-  		size = 10; 
-  	}
-  	
-  	npX += 250 + 20*Math.cos(anG);
-  	npY += 250 + 20*Math.sin(anG);
-  }
+    r--;   
+    npX = 250+ r*Math.cos(anG);
+    npY = 250+ r*Math.sin(anG);
+    anG += .1;
+    if(npX > 500 || npX < 0 || npY > 500 || npY < 0){
+      r= 200;
+    }
+}
 public void show(){
-  	ellipse((int)npX,(int)npY,size,size);
-	}
+  fill(80,81,81);
+    ellipse((int)npX,(int)npY,30,30);
+  }
 }
 class JumboParticle extends NormalParticle //uses inheritance
 {
   //your code here
   public void show() {
-	ellipse((float)npX,(float)npY,20,20);
+  fill(244, 220, 66);
+  ellipse((float)npX,(float)npY,size*5,size*5);
   
   }
 }
